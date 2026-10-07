@@ -56,13 +56,14 @@ class Dino():
         self.dino_rect.centery = self.screen_rect.centery - int(self.vertical_position)
 
     def jump(self) :
-        self.jumping = True
-        self.animate_me = False
-        self.vertical_speed = 22.0
+        if self.jumping == False :
+            self.jumping = True
+            self.animate_me = False
+            self.vertical_speed = 22.0
 
-        old_center = self.dino_rect.center
-        self.image = self.jump_image
-        self.dino_rect = self.image.get_rect(center = old_center)
+            old_center = self.dino_rect.center
+            self.image = self.jump_image
+            self.dino_rect = self.image.get_rect(center = old_center)
 
     def blitme(self) :
         # draws the dino into the screen
