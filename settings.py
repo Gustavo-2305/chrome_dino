@@ -9,4 +9,5 @@ class Settings() :
         self.background_color = (255, 255, 255)
         # dino settings
         self.animation_speed = 0.15
+        self.impulse = 22.0
         self.gravity = 1.3
