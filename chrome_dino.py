@@ -1,6 +1,7 @@
 import pygame
 
 from settings import Settings
+import asset_manager as am
 from dino import Dino
 
 cd_settings = Settings()
@@ -12,7 +13,11 @@ clock = pygame.time.Clock()
 running = True
 
 # creates the dino
-dino = Dino(screen, cd_settings)
+dino_images = am.load_dino_images()
+dino = Dino(cd_settings, dino_images, screen)
+
+all_sprites = pygame.sprite.Group()
+all_sprites.add(dino)
 
 while running :
     # poll for events
@@ -26,7 +31,8 @@ while running :
     screen.fill(cd_settings.background_color)
 
     dino.update()
-    dino.blitme()
+
+    all_sprites.draw(screen)
 
     pygame.display.flip() # draws the screen object
 
