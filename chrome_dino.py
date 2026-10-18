@@ -1,9 +1,10 @@
 import pygame
+import asset_manager as am
+import game_functions as gf
 
 from settings import Settings
-import asset_manager as am
 from dino import Dino
-from terrain import Terrain
+from terrain import Ground_Tile
 
 cd_settings = Settings()
 
@@ -19,11 +20,14 @@ dino = Dino(cd_settings, dino_images, screen)
 
 # creates the terrain
 terrain_image = am.load_terrain_image()
-terrain = Terrain(cd_settings, terrain_image, screen) 
+left_tile  = Ground_Tile(cd_settings, terrain_image, screen)
+right_tile = Ground_Tile(cd_settings, terrain_image, screen)
+right_tile.set_leftx(left_tile.get_rightx())
 
-# creates the sprite group
+# creates sprite groups
 all_sprites = pygame.sprite.Group()
-all_sprites.add(terrain)
+all_sprites.add(left_tile)
+all_sprites.add(right_tile)
 all_sprites.add(dino)
 
 while running :
@@ -38,6 +42,7 @@ while running :
     screen.fill(cd_settings.background_color)
 
     dino.update()
+    gf.terrain_update(left_tile, right_tile)
 
     all_sprites.draw(screen)
 
