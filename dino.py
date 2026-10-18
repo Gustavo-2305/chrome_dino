@@ -58,7 +58,3 @@ class Dino(pygame.sprite.Sprite):
 
             # changes to the midjump image
             self.image = self.jump_image
-
-    def blitme(self):
-        # draws the dino into the screen
-        self.screen.blit(self.image, self.rect)

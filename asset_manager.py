@@ -10,3 +10,8 @@ def load_dino_images():
     images["jump"] = pygame.image.load('images/jump0.png').convert_alpha()
 
     return images
+
+def load_terrain_image():
+    image = pygame.image.load('images/terrain.png').convert_alpha()
+
+    return image

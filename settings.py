@@ -11,3 +11,5 @@ class Settings() :
         self.animation_speed = 0.15
         self.impulse = 22.0
         self.gravity = 1.3
+        # terrein settings
+        self.terrainy = 37 # from screen.centery

@@ -3,6 +3,7 @@ import pygame
 from settings import Settings
 import asset_manager as am
 from dino import Dino
+from terrain import Terrain
 
 cd_settings = Settings()
 
@@ -16,7 +17,13 @@ running = True
 dino_images = am.load_dino_images()
 dino = Dino(cd_settings, dino_images, screen)
 
+# creates the terrain
+terrain_image = am.load_terrain_image()
+terrain = Terrain(cd_settings, terrain_image, screen) 
+
+# creates the sprite group
 all_sprites = pygame.sprite.Group()
+all_sprites.add(terrain)
 all_sprites.add(dino)
 
 while running :
