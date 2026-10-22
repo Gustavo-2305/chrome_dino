@@ -14,3 +14,6 @@ class Settings() :
         # terrein settings
         self.terrainy = 37 # from screen.centery
         self.terrain_speed = 10
+        #cactus setting
+        self.bigcactusy = -5 # from screen.centery
+        self.smallcactusy = 10 # from screen.centery

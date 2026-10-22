@@ -18,10 +18,10 @@ class Ground_Tile(pygame.sprite.Sprite):
         self.rect.left = 0
         self.rect.centery = self.screen_rect.centery + cd_settings.terrainy
 
-    def get_rightx(self):
+    def get_right(self):
         return self.rect.right
 
-    def set_leftx(self, left):
+    def set_left(self, left):
         self.rect.left = left
 
     def update(self):

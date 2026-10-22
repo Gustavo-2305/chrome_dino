@@ -1,4 +1,5 @@
 import pygame
+"""Loads sprite images"""
 
 def load_dino_images():
     images = {}
@@ -15,3 +16,21 @@ def load_terrain_image():
     image = pygame.image.load('images/terrain.png').convert_alpha()
 
     return image
+
+def load_big_cacti_images():
+    images = {}
+
+    images["img1"] = pygame.image.load('images/big_cactus1.png').convert_alpha()
+    images["img2"] = pygame.image.load('images/big_cactus2.png').convert_alpha()
+    images["img3"] = pygame.image.load('images/big_cactus3.png').convert_alpha()
+
+    return images
+
+def load_small_cacti_images():
+    images = {}
+
+    images["img1"] = pygame.image.load('images/small_cactus1.png').convert_alpha()
+    images["img2"] = pygame.image.load('images/small_cactus2.png').convert_alpha()
+    images["img3"] = pygame.image.load('images/small_cactus3.png').convert_alpha()
+
+    return images
