@@ -1,7 +1,7 @@
 import pygame
 
 class Dino(pygame.sprite.Sprite):
-    """The dinossaur character controlled by the player"""
+    """The dinossaur character controlled by the player."""
 
     def __init__(self, cd_settings, dino_images, screen):
         super().__init__()
@@ -24,8 +24,9 @@ class Dino(pygame.sprite.Sprite):
         self.state = "running"
 
         # sets starting position and speed
+        self.dinoy = cd_settings.dinoy
         self.rect.left = self.rect.width
-        self.rect.centery = self.screen_rect.centery
+        self.rect.centery = self.dinoy
         self.vertical_position = 0.0
         self.vertical_speed = 0.0
 
@@ -49,7 +50,7 @@ class Dino(pygame.sprite.Sprite):
         else:
             self.vertical_position = 0
             self.state = "running"
-        self.rect.centery = self.screen_rect.centery - int(self.vertical_position)
+        self.rect.centery = self.dinoy - int(self.vertical_position)
 
     def jump(self):
         if self.state != "jumping":

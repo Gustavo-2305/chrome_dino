@@ -1,5 +1,14 @@
 import pygame
-"""Loads sprite images"""
+
+def load_images():
+    """Loads all images assets into a dictionary."""
+    images = {}
+
+    images["dino_images"] = load_dino_images()
+    images["terrain_image"] = load_terrain_image()
+    images["cacti_images"] = load_cacti_images()
+
+    return images
 
 def load_dino_images():
     images = {}
@@ -17,20 +26,14 @@ def load_terrain_image():
 
     return image
 
-def load_big_cacti_images():
+def load_cacti_images():
     images = {}
 
-    images["img1"] = pygame.image.load('images/big_cactus1.png').convert_alpha()
-    images["img2"] = pygame.image.load('images/big_cactus2.png').convert_alpha()
-    images["img3"] = pygame.image.load('images/big_cactus3.png').convert_alpha()
-
-    return images
-
-def load_small_cacti_images():
-    images = {}
-
-    images["img1"] = pygame.image.load('images/small_cactus1.png').convert_alpha()
-    images["img2"] = pygame.image.load('images/small_cactus2.png').convert_alpha()
-    images["img3"] = pygame.image.load('images/small_cactus3.png').convert_alpha()
+    images["big1"] = pygame.image.load('images/big_cactus1.png').convert_alpha()
+    images["big2"] = pygame.image.load('images/big_cactus2.png').convert_alpha()
+    images["big3"] = pygame.image.load('images/big_cactus3.png').convert_alpha()
+    images["small1"] = pygame.image.load('images/small_cactus1.png').convert_alpha()
+    images["small2"] = pygame.image.load('images/small_cactus2.png').convert_alpha()
+    images["small3"] = pygame.image.load('images/small_cactus3.png').convert_alpha()
 
     return images

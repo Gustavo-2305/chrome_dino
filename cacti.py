@@ -1,49 +1,56 @@
 import pygame
 
-class Big_Cactus(pygame.sprite.Sprite):
-    """An individual cactus"""
+class Cactus(pygame.sprite.Sprite):
+    """Base class for all cactus obstacles."""
 
-    def __init__(self, cd_settings, cacti_images, screen, type):
+    def __init__(self, cactus_image, cactusy, cd_settings, screen):
         super().__init__()
 
         self.screen = screen
         self.screen_rect = screen.get_rect()
-
         # loads images and creates rects
-        self.image = cacti_images[type]
+        self.image = cactus_image
         self.rect = self.image.get_rect()
-
         # sets starting position and speed
         self.speed = cd_settings.terrain_speed
         self.rect.left = self.screen_rect.right
-        self.rect.centery = self.screen_rect.centery + cd_settings.bigcactusy
-
-    def get_right(self):
-        return self.rect.right
+        self.rect.centery = cactusy
 
     def update(self):
         self.rect.left -= self.speed
 
-class Small_Cactus(pygame.sprite.Sprite):
-    """An individual cactus"""
+class BigCactus1(Cactus):
+    """One big cactus."""
 
-    def __init__(self, cd_settings, cacti_images, screen, type):
-        super().__init__()
+    def __init__(self, cacti_images, cd_settings, screen):
+        super().__init__(cacti_images["big1"], cd_settings.big_cactusy, cd_settings, screen)
 
-        self.screen = screen
-        self.screen_rect = screen.get_rect()
+class BigCactus2(Cactus):
+    """Two big cacti."""
 
-        # loads images and creates rects
-        self.image = cacti_images[type]
-        self.rect = self.image.get_rect()
+    def __init__(self, cacti_images, cd_settings, screen):
+        super().__init__(cacti_images["big2"], cd_settings.big_cactusy, cd_settings, screen)
 
-        # sets starting position and speed
-        self.speed = cd_settings.terrain_speed
-        self.rect.left = self.screen_rect.right
-        self.rect.centery = self.screen_rect.centery + cd_settings.smallcactusy
+class BigCactus3(Cactus):
+    """Three big cacti."""
 
-    def get_right(self):
-        return self.rect.right
+    def __init__(self, cacti_images, cd_settings, screen):
+        super().__init__(cacti_images["big3"], cd_settings.big_cactusy, cd_settings, screen)
 
-    def update(self):
-        self.rect.left -= self.speed
+class SmallCactus1(Cactus):
+    """One small cactus."""
+
+    def __init__(self, cacti_images, cd_settings, screen):
+        super().__init__(cacti_images["small1"], cd_settings.small_cactusy, cd_settings, screen)
+
+class SmallCactus2(Cactus):
+    """Two small cacti."""
+
+    def __init__(self, cacti_images, cd_settings, screen):
+        super().__init__(cacti_images["small2"], cd_settings.small_cactusy, cd_settings, screen)
+
+class SmallCactus3(Cactus):
+    """Three small cacti."""
+
+    def __init__(self, cacti_images, cd_settings, screen):
+        super().__init__(cacti_images["small3"], cd_settings.small_cactusy, cd_settings, screen)

@@ -3,17 +3,22 @@ class Settings() :
 
     def __init__(self):
         self.max_fps = 60
+
         # screen settings
         self.screen_width = 1280
         self.screen_height = 720
         self.background_color = (255, 255, 255)
+
         # dino settings
+        self.dinoy = (2 * self.screen_height) // 3
         self.animation_speed = 0.15
-        self.impulse = 22.0
+        self.impulse = 23.0
         self.gravity = 1.3
-        # terrein settings
-        self.terrainy = 37 # from screen.centery
-        self.terrain_speed = 10
-        #cactus setting
-        self.bigcactusy = -5 # from screen.centery
-        self.smallcactusy = 10 # from screen.centery
+
+        # terrain settings
+        self.terrainy = (2 * self.screen_height) // 3 + 37
+        self.terrain_speed = 15
+
+        #cacti settings
+        self.big_cactusy = (2 * self.screen_height) // 3 - 5
+        self.small_cactusy = (2 * self.screen_height) // 3 + 10
