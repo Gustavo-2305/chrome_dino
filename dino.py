@@ -15,8 +15,8 @@ class Dino(pygame.sprite.Sprite):
         self.impulse = cd_settings.impulse
 
         # loads images and creates rects
-        self.walk_images = dino_images["walk"]
-        self.jump_image = dino_images["jump"]
+        self.walk_images = dino_images.walk
+        self.jump_image = dino_images.jump
         self.frame = 0.0
         self.image = self.walk_images[int(self.frame)]
         self.rect = self.image.get_rect()

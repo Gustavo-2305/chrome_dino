@@ -1,8 +1,9 @@
 import pygame
-import asset_manager as am
+
 import game_functions as gf
 
 from settings import Settings
+from asset_manager import Images
 from dino import Dino
 from terrain import Terrain
 
@@ -14,11 +15,12 @@ screen = pygame.display.set_mode((cd_settings.screen_width, cd_settings.screen_h
 clock = pygame.time.Clock()
 running = True
 
-images = am.load_images()
+images = Images()
+spawn_counter = cd_settings.spawn_waiting_distance
 
 # creates the dino and terrain
-dino = Dino(cd_settings, images["dino_images"], screen)
-terrain = Terrain(cd_settings, images["terrain_image"], screen)
+dino = Dino(cd_settings, images.dino_images, screen)
+terrain = Terrain(cd_settings, images.terrain_image, screen)
 
 # creates and populates sprite groups
 player_sprites = pygame.sprite.Group()
@@ -28,7 +30,8 @@ player_sprites.add(dino)
 terrain_sprites.add(terrain)
 
 while running :
-    running = gf.check_events(cacti_sprites, cd_settings, dino, images, screen)
+    running = gf.check_events(cd_settings, dino)
+    spawn_counter = gf.cacti_spawner(cacti_sprites, cd_settings, images, screen, spawn_counter)
 
     screen.fill(cd_settings.background_color)
 

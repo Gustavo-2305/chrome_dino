@@ -1,39 +1,37 @@
 import pygame
 
-def load_images():
-    """Loads all images assets into a dictionary."""
-    images = {}
+class Images():
+    """Stores all image assets."""
 
-    images["dino_images"] = load_dino_images()
-    images["terrain_image"] = load_terrain_image()
-    images["cacti_images"] = load_cacti_images()
+    def __init__(self):
+        self.dino_images = DinoImages()
+        self.terrain_image = pygame.image.load('images/terrain.png').convert_alpha()
+        self.cacti_images = CactiImages()
 
-    return images
+    def load_cacti_images():
+        images = {}
 
-def load_dino_images():
-    images = {}
+        
 
-    images["walk"] = [
-        pygame.image.load('images/walk0.png').convert_alpha(),
-        pygame.image.load('images/walk1.png').convert_alpha()
-    ]
-    images["jump"] = pygame.image.load('images/jump0.png').convert_alpha()
+        return images
 
-    return images
+class DinoImages():
+    """Stores all dino images."""
 
-def load_terrain_image():
-    image = pygame.image.load('images/terrain.png').convert_alpha()
+    def __init__(self):
+        self.walk = [
+            pygame.image.load('images/walk0.png').convert_alpha(),
+            pygame.image.load('images/walk1.png').convert_alpha()
+        ]
+        self.jump = pygame.image.load('images/jump0.png').convert_alpha()
 
-    return image
+class CactiImages():
+    """Stores all cacti images."""
 
-def load_cacti_images():
-    images = {}
-
-    images["big1"] = pygame.image.load('images/big_cactus1.png').convert_alpha()
-    images["big2"] = pygame.image.load('images/big_cactus2.png').convert_alpha()
-    images["big3"] = pygame.image.load('images/big_cactus3.png').convert_alpha()
-    images["small1"] = pygame.image.load('images/small_cactus1.png').convert_alpha()
-    images["small2"] = pygame.image.load('images/small_cactus2.png').convert_alpha()
-    images["small3"] = pygame.image.load('images/small_cactus3.png').convert_alpha()
-
-    return images
+    def __init__(self):
+        self.big1 = pygame.image.load('images/big_cactus1.png').convert_alpha()
+        self.big2 = pygame.image.load('images/big_cactus2.png').convert_alpha()
+        self.big3 = pygame.image.load('images/big_cactus3.png').convert_alpha()
+        self.small1 = pygame.image.load('images/small_cactus1.png').convert_alpha()
+        self.small2 = pygame.image.load('images/small_cactus2.png').convert_alpha()
+        self.small3 = pygame.image.load('images/small_cactus3.png').convert_alpha()
