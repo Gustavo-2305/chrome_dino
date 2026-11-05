@@ -38,6 +38,8 @@ while running :
     player_sprites.update()
     gf.update_terrain(cd_settings, images, screen, terrain_sprites)
     gf.update_cacti(cacti_sprites)
+    if gf.check_collisions(cacti_sprites, player_sprites):
+        spawn_counter = gf.reset_game(cacti_sprites, cd_settings, images, player_sprites, screen, terrain_sprites)
 
     terrain_sprites.draw(screen)
     cacti_sprites.draw(screen)

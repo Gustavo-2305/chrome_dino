@@ -67,3 +67,26 @@ def update_cacti(cacti_sprites):
     for cactus in cacti_sprites:
         if cactus.rect.right < 0:
             cacti_sprites.remove(cactus)
+
+def check_collisions(cacti_sprites, player_sprites):
+    # checks and handles collisions between the dino and the cacti
+    collisions = pygame.sprite.groupcollide(player_sprites, cacti_sprites, False, False)
+
+    if collisions:
+        input("Press any key to continue...")
+        return True
+    else:
+        return False
+
+def reset_game(cacti_sprites, cd_settings, images, player_sprites, screen, terrain_sprites):
+    # resets the whole game
+    
+    player_sprites.sprites()[0].vertical_position = 0
+
+    terrain_sprites.empty()
+    terrain = Terrain(cd_settings, images.terrain_image, screen)
+    terrain_sprites.add(terrain)
+
+    cacti_sprites.empty()
+
+    return cd_settings.spawn_waiting_distance

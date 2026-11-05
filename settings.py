@@ -13,7 +13,7 @@ class Settings() :
         self.dinoy = (2 * self.screen_height) // 3
         self.animation_speed = 0.15
         self.impulse = 25.0
-        self.gravity = 1.7
+        self.gravity = 1.8
 
         # terrain settings
         self.terrainy = (2 * self.screen_height) // 3 + 37
