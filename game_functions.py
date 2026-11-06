@@ -7,24 +7,31 @@ from terrain import Terrain
 
 random.seed()
 
-def check_events(cd_settings, dino):
+def check_events(cd_settings, dino, game_state, play_button):
     # checks for player inputs
-
     for event in pygame.event.get() :
         if event.type == pygame.QUIT :
-            return False
+            game_state.running = False
         elif event.type == pygame.KEYDOWN :
             if event.key == pygame.K_SPACE :
-                dino.jump()
-                
+                if game_state.status == "running":
+                    dino.jump()
+                elif game_state.status == "before_first":
+                    game_state.status = "running"
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mousex, mousey = pygame.mouse.get_pos()
+            check_play_button(game_state, play_button, mousex, mousey)
 
-    return True
+def check_play_button(game_state, play_button, mousex, mousey) :
+    # checks if the play button was clicked
+    if game_state.status == "gameover" and play_button.rect.collidepoint(mousex, mousey):
+        game_state.status = "running"
 
-def cacti_spawner(cacti_sprites, cd_settings, images, screen, spawn_counter):
+def cacti_spawner(cacti_sprites, cd_settings, game_state, images, screen):
     # spawns the cacti
-    if spawn_counter < 0:
+    if game_state.spawn_counter < 0:
         type = random.randint(0, 5)
-        spawn_counter = random.randint(cd_settings.spawn_min_interval, cd_settings.spawn_max_interval)
+        game_state.spawn_counter = random.randint(cd_settings.spawn_min_interval, cd_settings.spawn_max_interval)
 
         if type == 0 :
             new_cactus = ca.BigCactus1(images.cacti_images, cd_settings, screen)
@@ -45,7 +52,7 @@ def cacti_spawner(cacti_sprites, cd_settings, images, screen, spawn_counter):
             new_cactus = ca.SmallCactus3(images.cacti_images, cd_settings, screen)
             cacti_sprites.add(new_cactus)
 
-    return spawn_counter - cd_settings.terrain_speed
+    game_state.spawn_counter -= cd_settings.terrain_speed
 
 def update_terrain(cd_settings, images, screen, terrain_sprites):
     # updates terrain objects, adds and remove them as necessary
@@ -68,20 +75,20 @@ def update_cacti(cacti_sprites):
         if cactus.rect.right < 0:
             cacti_sprites.remove(cactus)
 
-def check_collisions(cacti_sprites, player_sprites):
+def check_collisions(cacti_sprites, dino):
     # checks and handles collisions between the dino and the cacti
-    collisions = pygame.sprite.groupcollide(player_sprites, cacti_sprites, False, False)
+    collisions = pygame.sprite.spritecollideany(dino, cacti_sprites)
 
     if collisions:
-        input("Press any key to continue...")
         return True
-    else:
-        return False
 
-def reset_game(cacti_sprites, cd_settings, images, player_sprites, screen, terrain_sprites):
+    return False
+
+def reset_game(cacti_sprites, cd_settings, dino, game_state, images, screen, terrain_sprites):
     # resets the whole game
-    
-    player_sprites.sprites()[0].vertical_position = 0
+    dino.vertical_position = 0
+    dino.rect.centery = cd_settings.dinoy
+    dino.image = dino.jump_image
 
     terrain_sprites.empty()
     terrain = Terrain(cd_settings, images.terrain_image, screen)
@@ -89,4 +96,5 @@ def reset_game(cacti_sprites, cd_settings, images, player_sprites, screen, terra
 
     cacti_sprites.empty()
 
-    return cd_settings.spawn_waiting_distance
+    game_state.spawn_counter = cd_settings.spawn_waiting_distance
+    game_state.status = "gameover"

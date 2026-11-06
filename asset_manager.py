@@ -7,13 +7,7 @@ class Images():
         self.dino_images = DinoImages()
         self.terrain_image = pygame.image.load('images/terrain.png').convert_alpha()
         self.cacti_images = CactiImages()
-
-    def load_cacti_images():
-        images = {}
-
-        
-
-        return images
+        self.play_button_image = pygame.image.load('images/play_button.png').convert_alpha()
 
 class DinoImages():
     """Stores all dino images."""

@@ -1,11 +1,7 @@
-import pygame
-
-class Dino(pygame.sprite.Sprite):
+class Dino():
     """The dinossaur character controlled by the player."""
 
     def __init__(self, cd_settings, dino_images, screen):
-        super().__init__()
-
         self.screen = screen
         self.screen_rect = screen.get_rect()
 
@@ -18,7 +14,7 @@ class Dino(pygame.sprite.Sprite):
         self.walk_images = dino_images.walk
         self.jump_image = dino_images.jump
         self.frame = 0.0
-        self.image = self.walk_images[int(self.frame)]
+        self.image = self.jump_image
         self.rect = self.image.get_rect()
 
         self.state = "running"
@@ -59,3 +55,7 @@ class Dino(pygame.sprite.Sprite):
 
             # changes to the midjump image
             self.image = self.jump_image
+
+    def blit_me(self):
+        # draws the dino to the screen
+        self.screen.blit(self.image, self.rect)

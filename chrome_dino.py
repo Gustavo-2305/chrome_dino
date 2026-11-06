@@ -3,7 +3,9 @@ import pygame
 import game_functions as gf
 
 from settings import Settings
+from game_state import GameState
 from asset_manager import Images
+from button import PlayButton
 from dino import Dino
 from terrain import Terrain
 
@@ -13,37 +15,38 @@ cd_settings = Settings()
 pygame.init()
 screen = pygame.display.set_mode((cd_settings.screen_width, cd_settings.screen_height))
 clock = pygame.time.Clock()
-running = True
 
+game_state = GameState(cd_settings)
 images = Images()
-spawn_counter = cd_settings.spawn_waiting_distance
 
 # creates the dino and terrain
 dino = Dino(cd_settings, images.dino_images, screen)
 terrain = Terrain(cd_settings, images.terrain_image, screen)
 
 # creates and populates sprite groups
-player_sprites = pygame.sprite.Group()
+play_button = PlayButton(cd_settings, images.play_button_image, screen)
 terrain_sprites = pygame.sprite.Group()
 cacti_sprites = pygame.sprite.Group()
-player_sprites.add(dino)
 terrain_sprites.add(terrain)
 
-while running :
-    running = gf.check_events(cd_settings, dino)
-    spawn_counter = gf.cacti_spawner(cacti_sprites, cd_settings, images, screen, spawn_counter)
+while game_state.running :
+    gf.check_events(cd_settings, dino, game_state, play_button)
 
     screen.fill(cd_settings.background_color)
 
-    player_sprites.update()
-    gf.update_terrain(cd_settings, images, screen, terrain_sprites)
-    gf.update_cacti(cacti_sprites)
-    if gf.check_collisions(cacti_sprites, player_sprites):
-        spawn_counter = gf.reset_game(cacti_sprites, cd_settings, images, player_sprites, screen, terrain_sprites)
+    if game_state.status == "running":
+        gf.cacti_spawner(cacti_sprites, cd_settings, game_state, images, screen)
+        dino.update()
+        gf.update_terrain(cd_settings, images, screen, terrain_sprites)
+        gf.update_cacti(cacti_sprites)
+        if gf.check_collisions(cacti_sprites, dino):
+            gf.reset_game(cacti_sprites, cd_settings, dino, game_state, images, screen, terrain_sprites)
 
     terrain_sprites.draw(screen)
     cacti_sprites.draw(screen)
-    player_sprites.draw(screen)
+    dino.blit_me()
+    if game_state.status == "gameover":
+        play_button.blit_me()
 
     pygame.display.flip() # draws the screen object
 

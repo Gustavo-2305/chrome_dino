@@ -19,9 +19,12 @@ class Settings() :
         self.terrainy = (2 * self.screen_height) // 3 + 37
         self.terrain_speed = 15
 
-        #cacti settings
+        # cacti settings
         self.big_cactusy = (2 * self.screen_height) // 3 - 5
         self.small_cactusy = (2 * self.screen_height) // 3 + 10
         self.spawn_waiting_distance = 2 * self.screen_width
         self.spawn_min_interval = self.screen_width // 2
         self.spawn_max_interval = (3 * self.screen_width) // 4
+
+        # button settings
+        self.buttony = self.screen_height // 2 + 30
