@@ -1,7 +1,7 @@
 class PlayButton():
+    """The play button used to restart the game."""
 
     def __init__(self, cd_settings, play_button_image, screen):
-        """The play button used to restart the game"""
         self.screen = screen
         self.screen_rect = screen.get_rect()
 

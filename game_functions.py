@@ -25,7 +25,7 @@ def check_events(cd_settings, dino, game_state, play_button):
 def check_play_button(game_state, play_button, mousex, mousey) :
     # checks if the play button was clicked
     if game_state.status == "gameover" and play_button.rect.collidepoint(mousex, mousey):
-        game_state.status = "running"
+        game_state.status = "to_reset"
 
 def cacti_spawner(cacti_sprites, cd_settings, game_state, images, screen):
     # spawns the cacti
@@ -97,4 +97,4 @@ def reset_game(cacti_sprites, cd_settings, dino, game_state, images, screen, ter
     cacti_sprites.empty()
 
     game_state.spawn_counter = cd_settings.spawn_waiting_distance
-    game_state.status = "gameover"
+    game_state.status = "running"

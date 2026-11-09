@@ -27,4 +27,5 @@ class Settings() :
         self.spawn_max_interval = (3 * self.screen_width) // 4
 
         # button settings
-        self.buttony = self.screen_height // 2 + 30
+        self.buttony = (3 * self.screen_height) // 5
+        self.game_overy = (3 * self.screen_height) // 5 - 90

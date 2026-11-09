@@ -8,6 +8,7 @@ class Images():
         self.terrain_image = pygame.image.load('images/terrain.png').convert_alpha()
         self.cacti_images = CactiImages()
         self.play_button_image = pygame.image.load('images/play_button.png').convert_alpha()
+        self.text_images = TextImages()
 
 class DinoImages():
     """Stores all dino images."""
@@ -29,3 +30,9 @@ class CactiImages():
         self.small1 = pygame.image.load('images/small_cactus1.png').convert_alpha()
         self.small2 = pygame.image.load('images/small_cactus2.png').convert_alpha()
         self.small3 = pygame.image.load('images/small_cactus3.png').convert_alpha()
+
+class TextImages():
+    """Stores all text images."""
+
+    def __init__(self):
+        self.game_over = pygame.image.load('images/text-game_over.png').convert_alpha()
