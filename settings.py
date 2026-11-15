@@ -29,3 +29,9 @@ class Settings() :
         # button settings
         self.buttony = (3 * self.screen_height) // 5
         self.game_overy = (3 * self.screen_height) // 5 - 90
+
+        # scoreboard settings
+        self.increase_per_frame = 0.2
+        self.font_spacing = 4
+        self.scoreboardx = self.screen_width - 15 * (18 + self.font_spacing)
+        self.scoreboardy = (3 * self.screen_height) // 5 - 160

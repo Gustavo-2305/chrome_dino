@@ -84,8 +84,10 @@ def check_collisions(cacti_sprites, dino):
 
     return False
 
-def reset_game(cacti_sprites, cd_settings, dino, game_state, images, screen, terrain_sprites):
+def reset_game(cacti_sprites, cd_settings, dino, game_state, images, scoreboard, screen, terrain_sprites):
     # resets the whole game
+    scoreboard.reset()
+
     dino.vertical_position = 0
     dino.rect.centery = cd_settings.dinoy
     dino.image = dino.jump_image

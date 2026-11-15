@@ -30,7 +30,6 @@ class CustomFont():
 
         return surface
 
-
 class GameOver():
     """The game over text."""
 

@@ -5,6 +5,7 @@ import game_functions as gf
 from settings import Settings
 from game_state import GameState
 from asset_manager import Images
+from scoreboard import Scoreboard
 from button import PlayButton
 from text import GameOver
 from text import CustomFont
@@ -13,13 +14,17 @@ from terrain import Terrain
 
 cd_settings = Settings()
 
-# setup pygame and create screen/clock object
+# setup pygame and creates the screen/clock
 pygame.init()
 screen = pygame.display.set_mode((cd_settings.screen_width, cd_settings.screen_height))
 clock = pygame.time.Clock()
 
 game_state = GameState(cd_settings)
 images = Images()
+
+# creates the custom font and scoreboard
+font = CustomFont("images/font.png", 18, 21, "0123456789HI")
+scoreboard = Scoreboard(cd_settings, font)
 
 # creates the dino and terrain
 dino = Dino(cd_settings, images.dino_images, screen)
@@ -32,15 +37,13 @@ terrain_sprites = pygame.sprite.Group()
 cacti_sprites = pygame.sprite.Group()
 terrain_sprites.add(terrain)
 
-# creates the custom font
-font = CustomFont("images/font.png", 18, 21, "0123456789HI")
-
 while game_state.running :
     gf.check_events(cd_settings, dino, game_state, play_button)
 
     screen.fill(cd_settings.background_color)
 
     if game_state.status == "running":
+        scoreboard.update()
         gf.cacti_spawner(cacti_sprites, cd_settings, game_state, images, screen)
         dino.update()
         gf.update_terrain(cd_settings, images, screen, terrain_sprites)
@@ -48,9 +51,7 @@ while game_state.running :
         if gf.check_collisions(cacti_sprites, dino):
             game_state.status = "gameover"
     elif game_state.status == "to_reset":
-        gf.reset_game(cacti_sprites, cd_settings, dino, game_state, images, screen, terrain_sprites)
-
-    score = font.render("0123456789 HI", 4)
+        gf.reset_game(cacti_sprites, cd_settings, dino, game_state, images, scoreboard, screen, terrain_sprites)
 
     terrain_sprites.draw(screen)
     cacti_sprites.draw(screen)
@@ -58,7 +59,8 @@ while game_state.running :
     if game_state.status == "gameover":
         play_button.blit_me()
         game_over_text.blit_me()
-    screen.blit(score, (18,21))
+    scoreboard_surface = scoreboard.render()
+    screen.blit(scoreboard_surface, (cd_settings.scoreboardx,cd_settings.scoreboardy))
 
     pygame.display.flip() # draws the screen object
 
