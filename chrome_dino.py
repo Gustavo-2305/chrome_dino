@@ -7,6 +7,7 @@ from game_state import GameState
 from asset_manager import Images
 from button import PlayButton
 from text import GameOver
+from text import CustomFont
 from dino import Dino
 from terrain import Terrain
 
@@ -31,6 +32,9 @@ terrain_sprites = pygame.sprite.Group()
 cacti_sprites = pygame.sprite.Group()
 terrain_sprites.add(terrain)
 
+# creates the custom font
+font = CustomFont("images/font.png", 18, 21, "0123456789HI")
+
 while game_state.running :
     gf.check_events(cd_settings, dino, game_state, play_button)
 
@@ -46,12 +50,15 @@ while game_state.running :
     elif game_state.status == "to_reset":
         gf.reset_game(cacti_sprites, cd_settings, dino, game_state, images, screen, terrain_sprites)
 
+    score = font.render("0123456789 HI", 4)
+
     terrain_sprites.draw(screen)
     cacti_sprites.draw(screen)
     dino.blit_me()
     if game_state.status == "gameover":
         play_button.blit_me()
         game_over_text.blit_me()
+    screen.blit(score, (18,21))
 
     pygame.display.flip() # draws the screen object
 
