@@ -1,2 +1,4 @@
 # chrome_dino
-A clone of the chrome://dino/ game, made with pygame.
+A copy of Google Chrome's Dinosaur Game (chrome://dino) made with Python, using the Pygame library.
+
+Demo video: https://youtu.be/vEcXpLhLXDs
